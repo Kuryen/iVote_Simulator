@@ -15,13 +15,22 @@ public class SimulationDriver {
         Random random = new Random();
 
         // Simulate Voting
-        for (Student student : students) {
-            List<String> options = question.getOptions();
-            String selectedOption = options.get(random.nextInt(options.size()));
-            votingService.submitVote(student.getId(), selectedOption);
+        for (Student student : students) {  
+            List<String> answers = new ArrayList<>();
+            if (question.isMultipleChoice()) {
+                // Randomly add one or more options to simulate multiple answers
+                for (int i = 0; i <= random.nextInt(question.getOptions().size()); i++) {
+                    String option = question.getOptions().get(random.nextInt(question.getOptions().size()));
+                    if (!answers.contains(option)) {
+                        answers.add(option);
+                    }
+                }
+            } else {
+                // Select only one option
+                answers.add(question.getOptions().get(random.nextInt(question.getOptions().size())));
+            }
+            votingService.submitVote(student.getId(), answers);
         }
-
-        // Display Results
         votingService.printResults();
     }
 
