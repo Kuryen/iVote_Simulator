@@ -12,7 +12,7 @@ public class SimulationDriver {
 
         // Initialize Voting Service
         for (int i = 0; i < 5; i++) { // Simulate 5 different voting rounds
-            QuestionInt question = questionManager.getRandomQuestion();
+            QuestionInt question = questionManager.getNextQuestion();
             votingService.setCurrentQuestion(question);
 
             // Simulate Voting
@@ -27,7 +27,7 @@ public class SimulationDriver {
                         }
                     }
                 } else {
-                    // Select only one option
+                    // For single-choice questions
                     answers.add(question.getOptions().get(random.nextInt(question.getOptions().size())));
                 }
                 votingService.submitVote(student.getId(), answers);
