@@ -7,7 +7,7 @@ public class SimulationDriver {
         VoteInt votingService = new VotingService();
 
         // Generate Students and Their Answers
-        List<Student> students = generateStudents(100);  // generate 100 students
+        List<Student> students = generateStudents(100); // generate 100 students
         Random random = new Random();
 
         // Initialize Voting Service
